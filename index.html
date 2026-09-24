@@ -7,215 +7,255 @@
 <title>Damisha & Akarsha · 5 December 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Plus+Jakarta+Sans:wght@400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ivory:#FBF6EE; --ivory2:#F4EDE1; --ink:#2C2620; --soft:#6E655A;
-  --gold:#B08D57; --gold-d:#9A784A; --blush:#E4CDC5; --sage:#9AA890; --line:rgba(44,38,32,.14);
+  --cream:#FBF6EC; --cream2:#F3EADB; --ink:#251F19; --soft:#6C6155;
+  --gold:#A9865B; --gold-d:#8C6B43; --blush:#DEB9AE; --sage:#9CA88F;
+  --hair:rgba(37,31,25,.08); --hair2:rgba(37,31,25,.14);
+  --e1:cubic-bezier(.2,.7,.3,1); --e2:cubic-bezier(.32,.72,0,1);
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;padding:0}
-body{background:var(--ivory);color:var(--ink);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-.serif{font-family:'Cormorant Garamond',Georgia,serif}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:'Plus Jakarta Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.fr{font-family:'Fraunces',Georgia,serif;font-variation-settings:'opsz' 144}
 .script{font-family:'Pinyon Script',cursive}
-.wrap{max-width:700px;margin:0 auto;padding:0 24px}
-.center{text-align:center}
-.kicker{font-size:12.5px;letter-spacing:.42em;text-transform:uppercase;color:var(--gold-d);font-weight:500}
-.rule{width:0;height:1px;background:var(--gold);margin:22px auto;opacity:.75;transition:width 1.4s cubic-bezier(.2,.7,.3,1)}
-.rule.draw{width:64px}
-.rule.sm.draw{width:38px}
-.fade{opacity:0;transform:translateY(20px);transition:opacity 1.1s ease,transform 1.1s cubic-bezier(.2,.7,.3,1)}
-.fade.in{opacity:1;transform:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+.narrow{max-width:720px}
 
-/* petals */
-.petals{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-.petal{position:absolute;top:-6%;width:14px;height:18px;background:var(--blush);border-radius:80% 0 80% 0;opacity:.55;animation:fall linear infinite}
-.petal:nth-child(even){background:#EADFcf;border-radius:0 80% 0 80%}
-@keyframes fall{
-  0%{transform:translateY(-10vh) translateX(0) rotate(0);opacity:0}
-  10%{opacity:.6}
-  100%{transform:translateY(110vh) translateX(40px) rotate(360deg);opacity:.15}
-}
+/* film grain + fixed texture */
+.grain{position:fixed;inset:0;z-index:80;pointer-events:none;opacity:.05;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")}
+.petals{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.petal{position:absolute;top:-6%;width:13px;height:17px;background:var(--blush);border-radius:80% 0 80% 0;opacity:.5;animation:fall linear infinite;will-change:transform}
+.petal:nth-child(even){background:#E7D8C4;border-radius:0 80% 0 80%}
+@keyframes fall{0%{transform:translateY(-12vh) rotate(0);opacity:0}12%{opacity:.55}100%{transform:translateY(112vh) translateX(46px) rotate(360deg);opacity:.12}}
+
+.eyebrow{display:inline-block;border:1px solid var(--hair2);border-radius:999px;padding:7px 15px;font-size:10px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-d)}
+.hr{width:0;height:1px;background:var(--gold);margin:26px auto;opacity:.8;transition:width 1.5s var(--e1)}
+.hr.draw{width:70px}.hr.sm.draw{width:42px}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(30px);filter:blur(9px);transition:opacity 1.05s var(--e1),transform 1.05s var(--e1),filter 1.05s ease}
+.reveal.in{opacity:1;transform:none;filter:none}
 
 /* hero */
-.hero{position:relative;z-index:1;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:56px 24px;overflow:hidden}
+.hero{position:relative;z-index:2;min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:64px 28px}
 .hero:before{content:"";position:absolute;inset:0;z-index:-1;background:
-   radial-gradient(120% 80% at 50% -10%, rgba(228,205,197,.55), transparent 60%),
-   radial-gradient(120% 80% at 50% 110%, rgba(154,168,144,.28), transparent 60%);
-   animation:breathe 9s ease-in-out infinite}
-@keyframes breathe{0%,100%{opacity:.9}50%{opacity:.6}}
-@keyframes pop{to{opacity:1;transform:scale(1)}}
-.crest{width:120px;height:120px;display:block;margin:0 auto 24px}
-.crest text{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:116px;fill:#CFA69C;opacity:0;animation:cfade 1.1s cubic-bezier(.2,.9,.3,1) forwards}
-@keyframes cdraw{to{stroke-dashoffset:0}}
-@keyframes cfade{from{opacity:0}to{opacity:1}}
-.foot .crest{width:78px;height:78px;margin:0 auto 6px}
-.parents{font-size:12.5px;letter-spacing:.16em;line-height:2;color:var(--soft);text-transform:uppercase;max-width:520px;opacity:0;animation:up 1s .35s ease forwards}
-.request{font-size:12.5px;letter-spacing:.16em;line-height:2;color:var(--soft);text-transform:uppercase;margin-top:16px;opacity:0;animation:up 1s .5s ease forwards}
-.names{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(56px,14vw,116px);line-height:.9;letter-spacing:.22em;margin:20px 0 6px;opacity:0;transform:translateY(14px);animation:settle 1.6s .7s cubic-bezier(.2,.7,.3,1) forwards}
-.names .amp{font-family:'Pinyon Script',cursive;font-style:normal;font-weight:400;color:var(--gold);display:block;font-size:.42em;letter-spacing:0;margin:.02em 0;text-transform:none}
-@keyframes settle{to{opacity:1;transform:none;letter-spacing:.04em}}
-@keyframes up{to{opacity:1}}
-.date{font-family:'Cormorant Garamond',serif;font-size:24px;letter-spacing:.05em;margin-top:6px;opacity:0;animation:up 1s 1.4s ease forwards}
-.venue{font-size:13px;color:var(--soft);margin-top:6px;letter-spacing:.05em;opacity:0;animation:up 1s 1.55s ease forwards}
-.cd{display:flex;gap:24px;justify-content:center;margin-top:34px;opacity:0;animation:up 1s 1.7s ease forwards}
-.cd div{min-width:56px}
-.cd .n{font-family:'Cormorant Garamond',serif;font-size:36px;line-height:1}
-.cd .l{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--soft);margin-top:4px}
-.scroll{position:absolute;bottom:22px;left:0;right:0;text-align:center;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--soft);animation:bob 2.6s ease-in-out infinite}
-@keyframes bob{0%,100%{transform:translateY(0);opacity:.6}50%{transform:translateY(7px);opacity:1}}
+  radial-gradient(60% 45% at 50% 6%, rgba(222,185,174,.5), transparent 62%),
+  radial-gradient(70% 55% at 50% 104%, rgba(156,168,143,.32), transparent 60%),
+  radial-gradient(40% 30% at 82% 30%, rgba(169,134,91,.16), transparent 60%);
+  animation:breathe 11s ease-in-out infinite}
+@keyframes breathe{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.72;transform:scale(1.04)}}
+.crest{width:128px;height:128px;display:block;margin:0 auto 30px}
+.crest text{font-family:'Fraunces',serif;font-weight:400;font-size:112px;fill:var(--blush);opacity:0;animation:cfade 1.2s var(--e2) forwards}
+@keyframes cdraw{to{stroke-dashoffset:0}}@keyframes cfade{to{opacity:1}}
+.rise{opacity:0;transform:translateY(16px);animation:rise 1.1s var(--e1) forwards}
+@keyframes rise{to{opacity:1;transform:none}}
+.parents{font-size:12px;font-weight:500;letter-spacing:.18em;line-height:2.1;color:var(--soft);text-transform:uppercase;max-width:540px}
+.request{font-size:11.5px;letter-spacing:.2em;line-height:2.1;color:var(--soft);text-transform:uppercase;margin-top:18px}
+.names{font-weight:380;font-size:clamp(60px,14.5vw,150px);line-height:.84;letter-spacing:-.015em;margin:26px 0 8px;opacity:0;transform:translateY(18px) scale(.98);filter:blur(6px);animation:settle 1.7s .6s var(--e1) forwards}
+.names .amp{font-family:'Pinyon Script',cursive;color:var(--gold);display:block;font-size:.38em;letter-spacing:0;margin:.04em 0;line-height:1;text-transform:none}
+@keyframes settle{to{opacity:1;transform:none;filter:none}}
+.hdate{font-size:23px;letter-spacing:.01em;margin-top:8px}
+.hdate.two{font-size:16px;margin-top:2px;color:var(--soft)}
+.venue{font-size:12.5px;color:var(--soft);letter-spacing:.06em;margin-top:12px}
+.cd{display:flex;gap:30px;justify-content:center;margin-top:40px}
+.cd .n{font-size:40px;line-height:1;font-variation-settings:'opsz' 144}
+.cd .l{font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--soft);margin-top:6px}
+.scroll{position:absolute;bottom:26px;left:0;right:0;text-align:center;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--soft);animation:bob 2.8s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0);opacity:.55}50%{transform:translateY(8px);opacity:1}}
 
-section{position:relative;z-index:1;padding:80px 0}
-.quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(24px,5vw,34px);line-height:1.4;text-align:center}
-.lead{font-size:15.5px;line-height:1.95;color:var(--soft);text-align:center;max-width:520px;margin:0 auto}
+section{position:relative;z-index:2;padding:120px 0}
+.kick-c{text-align:center;margin-bottom:14px}
+.quote{font-weight:340;font-style:italic;font-size:clamp(28px,5.5vw,46px);line-height:1.35;text-align:center;letter-spacing:-.01em}
+.lead{font-size:15px;line-height:2;color:var(--soft);text-align:center;max-width:520px;margin:0 auto}
 
-.cards{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:8px}
-@media(max-width:640px){.cards{grid-template-columns:1fr}}
-.evt{background:#fff;border:1px solid var(--line);border-radius:4px;padding:34px 26px;text-align:center;box-shadow:0 24px 60px -40px rgba(80,60,40,.5);transition:transform .5s ease,box-shadow .5s ease}
-.evt:hover{transform:translateY(-4px);box-shadow:0 34px 70px -40px rgba(80,60,40,.55)}
-.evt .t{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-d)}
-.evt h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;margin:12px 0 4px}
-.evt .time{font-family:'Cormorant Garamond',serif;font-size:21px}
-.evt .where{font-size:13.5px;color:var(--soft);margin-top:10px;line-height:1.65}
-.evt a{color:var(--gold-d);text-decoration:none;font-size:12.5px;letter-spacing:.08em;border-bottom:1px solid var(--gold);padding-bottom:2px;display:inline-block;margin-top:16px}
+/* double-bezel cards */
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:12px}
+.shell{background:rgba(255,255,255,.5);border:1px solid var(--hair);border-radius:34px;padding:8px;box-shadow:0 50px 90px -60px rgba(90,60,30,.5);transition:transform .7s var(--e2),box-shadow .7s var(--e2)}
+.shell:hover{transform:translateY(-6px);box-shadow:0 60px 110px -60px rgba(90,60,30,.55)}
+.core{background:#fff;border-radius:26px;box-shadow:inset 0 1px 1px rgba(255,255,255,.7);padding:40px 32px;text-align:center}
+.core .t{font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-d)}
+.core h3{font-weight:400;font-size:34px;margin:14px 0 4px;letter-spacing:-.01em}
+.core .time{font-size:22px;font-variation-settings:'opsz' 60}
+.core .where{font-size:13px;color:var(--soft);margin-top:12px;line-height:1.7}
 
-.details{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:10px}
-@media(max-width:640px){.details{grid-template-columns:1fr;gap:32px}}
-.det{text-align:center}
-.det .di{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--gold);margin-bottom:8px}
-.det h4{font-size:12px;letter-spacing:.24em;text-transform:uppercase;margin:0 0 8px}
-.det p{font-size:14px;line-height:1.7;color:var(--soft);margin:0}
+/* island button */
+.island{display:inline-flex;align-items:center;gap:12px;padding:11px 11px 11px 22px;border-radius:999px;background:var(--ink);color:var(--cream);
+  font-size:10.5px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;border:none;cursor:pointer;margin-top:22px;
+  transition:transform .55s var(--e2),background .4s ease}
+.island.ghost{background:transparent;color:var(--ink);border:1px solid var(--hair2)}
+.island .ic{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;font-size:14px;transition:transform .55s var(--e2)}
+.island.ghost .ic{background:rgba(37,31,25,.06)}
+.island:hover .ic{transform:translate(3px,-2px) scale(1.08)}
+.island:active{transform:scale(.97)}
 
-.rsvp{background:var(--ivory2)}
-.panel{background:#fff;border:1px solid var(--line);border-radius:6px;box-shadow:0 30px 80px -50px rgba(80,60,40,.6);padding:38px 30px;max-width:520px;margin:26px auto 0;overflow:hidden}
-.step{display:none;animation:sIn .55s cubic-bezier(.2,.7,.3,1) both}
+.details{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:14px}
+.det{text-align:center;padding:8px}
+.det .di{font-size:28px;color:var(--gold);margin-bottom:10px;font-variation-settings:'opsz' 40}
+.det h4{font-size:11px;letter-spacing:.26em;text-transform:uppercase;margin:0 0 10px}
+.det p{font-size:13.5px;line-height:1.8;color:var(--soft);margin:0}
+
+/* rsvp */
+.rsvp{background:linear-gradient(180deg,var(--cream),var(--cream2))}
+.panel-shell{background:rgba(255,255,255,.55);border:1px solid var(--hair);border-radius:36px;padding:8px;max-width:540px;margin:30px auto 0;box-shadow:0 50px 100px -60px rgba(90,60,30,.55)}
+.panel{background:#fff;border-radius:28px;box-shadow:inset 0 1px 1px rgba(255,255,255,.7);padding:44px 34px;overflow:hidden}
+.step{display:none;animation:sIn .6s var(--e2) both}
 .step.on{display:block}
-@keyframes sIn{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
-.greet{font-family:'Cormorant Garamond',serif;font-size:30px;text-align:center;line-height:1.25}
-.greet b{color:var(--gold-d);font-weight:600}
-.sub{text-align:center;color:var(--soft);font-size:14px;margin-top:8px;line-height:1.6}
-.yn{display:flex;gap:14px;margin-top:26px}
-.yn button{flex:1;padding:16px;border-radius:4px;border:1px solid var(--gold);background:#fff;color:var(--ink);font-family:'Cormorant Garamond',serif;font-size:20px;cursor:pointer;transition:all .2s}
-.yn button.joy{background:var(--gold);color:#fff}
-.yn button:active{transform:scale(.98)}
-.field{margin-top:20px}
-.field label{display:block;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--soft);margin-bottom:8px}
-.field input,.field textarea{width:100%;border:none;border-bottom:1px solid var(--line);background:transparent;font-family:'Inter',sans-serif;font-size:15px;color:var(--ink);padding:8px 2px;outline:none}
+@keyframes sIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}
+.greet{font-weight:380;font-size:32px;text-align:center;line-height:1.22}
+.greet b{color:var(--gold-d);font-weight:500}
+.sub{text-align:center;color:var(--soft);font-size:14px;margin-top:10px;line-height:1.65}
+.yn{display:flex;gap:14px;margin-top:28px}
+.yn button{flex:1;padding:17px;border-radius:16px;border:1px solid var(--hair2);background:#fff;color:var(--ink);font-family:'Fraunces',serif;font-size:19px;cursor:pointer;transition:transform .4s var(--e2),background .3s,color .3s,border-color .3s}
+.yn button.joy{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.yn button:hover{transform:translateY(-2px)}.yn button:active{transform:scale(.98)}
+.field{margin-top:22px}
+.field label{display:block;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--soft);margin-bottom:9px}
+.field input,.field textarea{width:100%;border:none;border-bottom:1px solid var(--hair2);background:transparent;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;color:var(--ink);padding:9px 2px;outline:none;transition:border-color .3s}
 .field input:focus,.field textarea:focus{border-color:var(--gold)}
-.field textarea{resize:none;min-height:56px}
-.stepper{display:flex;align-items:center;justify-content:center;gap:22px;margin-top:10px}
-.stepper button{width:44px;height:44px;border-radius:50%;border:1px solid var(--gold);background:#fff;color:var(--gold-d);font-size:22px;cursor:pointer;line-height:1}
-.stepper .num{font-family:'Cormorant Garamond',serif;font-size:44px;min-width:60px;text-align:center}
-.stepper .cap{font-size:11px;color:var(--soft);letter-spacing:.1em}
-.cta{width:100%;margin-top:28px;padding:16px;border:none;border-radius:4px;background:var(--ink);color:var(--ivory);font-size:13px;letter-spacing:.22em;text-transform:uppercase;cursor:pointer;transition:transform .12s}
+.field textarea{resize:none;min-height:58px}
+.stepper{display:flex;align-items:center;justify-content:center;gap:26px;margin-top:12px}
+.stepper button{width:46px;height:46px;border-radius:50%;border:1px solid var(--hair2);background:#fff;color:var(--gold-d);font-size:22px;cursor:pointer;line-height:1;transition:transform .4s var(--e2),border-color .3s}
+.stepper button:hover{border-color:var(--gold);transform:scale(1.05)}
+.stepper .num{font-family:'Fraunces',serif;font-size:52px;min-width:66px;text-align:center;font-variation-settings:'opsz' 144}
+.stepper .cap{font-size:10.5px;color:var(--soft);letter-spacing:.12em}
+.cta{width:100%;margin-top:30px;padding:17px;border:none;border-radius:16px;background:var(--ink);color:var(--cream);font-size:11px;letter-spacing:.24em;text-transform:uppercase;cursor:pointer;font-weight:600;transition:transform .4s var(--e2)}
 .cta:active{transform:scale(.99)}
-.back{display:block;margin:14px auto 0;background:none;border:none;color:var(--soft);font-size:12px;letter-spacing:.1em;cursor:pointer}
-.done{text-align:center;padding:8px 0}
-.done .seal{font-family:'Cormorant Garamond',serif;color:var(--gold-d);border:1px solid var(--gold);border-radius:50%;width:70px;height:70px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:30px;animation:pop .7s cubic-bezier(.2,.9,.3,1) both}
-.done h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:32px;margin:0 0 8px}
-.demoflag{text-align:center;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-d);opacity:.75;margin-top:30px}
+.back{display:block;margin:16px auto 0;background:none;border:none;color:var(--soft);font-size:11.5px;letter-spacing:.1em;cursor:pointer}
+.done{text-align:center;padding:10px 0}
+.done .seal{color:var(--gold-d);border:1px solid var(--gold);border-radius:50%;width:74px;height:74px;display:flex;align-items:center;justify-content:center;margin:0 auto 22px;font-size:30px;font-family:'Fraunces',serif;animation:pop .8s var(--e2) both}
+@keyframes pop{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:none}}
+.done h3{font-weight:400;font-size:34px;margin:0 0 8px}
+.demoflag{text-align:center;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-d);opacity:.7;margin-top:32px}
 
-.foot{position:relative;z-index:1;padding:72px 24px 92px;text-align:center}
-.foot .mono2{font-family:'Cormorant Garamond',serif;font-size:42px;color:var(--gold);letter-spacing:.05em}
-.foot p{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--soft);margin-top:14px}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:opacity .2s!important}.fade{transform:none}.names,.mono,.parents,.request,.date,.venue,.cd{opacity:1!important}.rule{width:64px!important}}
+.foot{position:relative;z-index:2;padding:96px 28px 110px;text-align:center}
+.foot .crest{width:82px;height:82px;margin:0 auto 8px}
+.foot p{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--soft);margin-top:10px}
+
+@media(max-width:768px){
+  section{padding:88px 0}
+  .cards,.details{grid-template-columns:1fr;gap:18px}
+  .wrap{padding:0 20px}
+  .core{padding:34px 26px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:opacity .25s!important}
+  .reveal{opacity:1;transform:none;filter:none}
+  .names,.parents,.request,.hdate,.venue,.cd,.crest text,.rise{opacity:1!important;transform:none!important;filter:none!important}
+  .hr{width:70px!important}
+}
 </style>
 </head>
 <body>
+<div class="grain"></div>
 <div class="petals" id="petals"></div>
 
 <header class="hero">
-  <svg class="crest" viewBox="0 0 200 200" aria-label="D and A monogram">
-    <circle cx="100" cy="100" r="80" fill="none" stroke="#CFA69C" stroke-width="1.3" stroke-dasharray="503" stroke-dashoffset="503" style="animation:cdraw 1.9s .3s ease forwards"/>
+  <svg class="crest rise" viewBox="0 0 200 200" aria-label="D and A monogram" style="animation-delay:0s">
+    <circle cx="100" cy="100" r="80" fill="none" stroke="#DEB9AE" stroke-width="1.2" stroke-dasharray="503" stroke-dashoffset="503" style="animation:cdraw 2s .3s ease forwards"/>
     <text x="80" y="140" text-anchor="middle" style="animation-delay:.7s">D</text>
     <text x="122" y="140" text-anchor="middle" style="animation-delay:.95s">A</text>
   </svg>
-  <div class="parents">Rohan and Nanditha Dassanayake<br>together with<br>Asoka and Nayomini Weerasooriya</div>
-  <div class="request">request the pleasure of your company<br>at the marriage of their children</div>
-  <h1 class="names serif">Damisha<span class="amp script">and</span>Akarsha</h1>
-  <div class="rule" id="r1"></div>
-  <div class="date serif">Half past four in the afternoon</div>
-  <div class="date serif" style="font-size:19px;margin-top:0">Saturday, the fifth of December, 2026</div>
-  <div class="venue">The Chapel of the Hope of the World, Ladies' College, Colombo 7</div>
-  <div class="cd" id="cd"></div>
+  <div class="parents rise" style="animation-delay:.3s">Rohan and Nanditha Dassanayake<br>together with<br>Asoka and Nayomini Weerasooriya</div>
+  <div class="request rise" style="animation-delay:.45s">request the pleasure of your company<br>at the marriage of their children</div>
+  <h1 class="names fr">Damisha<span class="amp">and</span>Akarsha</h1>
+  <div class="hr" id="r1"></div>
+  <div class="hdate fr rise" style="animation-delay:1.35s">Half past four in the afternoon</div>
+  <div class="hdate two fr rise" style="animation-delay:1.45s">Saturday, the fifth of December, 2026</div>
+  <div class="venue rise" style="animation-delay:1.55s">The Chapel of the Hope of the World, Ladies' College, Colombo 7</div>
+  <div class="cd fr rise" id="cd" style="animation-delay:1.7s"></div>
   <div class="scroll">Scroll</div>
 </header>
 
-<section class="wrap fade">
-  <div class="quote">"And so the adventure begins."</div>
-  <div class="rule sm" data-draw></div>
-  <p class="lead">With hearts full of joy, we invite you to share in the beginning of our forever. Your presence would make our day complete.</p>
+<section>
+  <div class="wrap narrow reveal">
+    <div class="quote fr">"And so the adventure begins."</div>
+    <div class="hr sm" data-draw></div>
+    <p class="lead">With hearts full of joy, we invite you to share in the beginning of our forever. Your presence would make our day complete.</p>
+  </div>
 </section>
 
-<section class="wrap fade">
-  <div class="center"><div class="kicker">The Celebration</div></div>
-  <div class="cards">
-    <div class="evt">
-      <div class="t">The Ceremony</div>
-      <h3 class="serif">Holy Matrimony</h3>
-      <div class="time serif">4:30 in the afternoon</div>
-      <div class="where">The Chapel of the Hope of the World<br>Ladies' College, Colombo 7</div>
-      <a href="#">View map &rsaquo;</a>
-    </div>
-    <div class="evt">
-      <div class="t">The Reception</div>
-      <h3 class="serif">Cocktails &amp; Dinner</h3>
-      <div class="time serif">6:30 in the evening</div>
-      <div class="where">Sangam Ballroom<br>ITC Ratnadipa, Colombo</div>
-      <a href="#">View map &rsaquo;</a>
+<section>
+  <div class="wrap">
+    <div class="kick-c reveal"><span class="eyebrow">The Celebration</span></div>
+    <div class="cards">
+      <div class="shell reveal">
+        <div class="core">
+          <div class="t">The Ceremony</div>
+          <h3 class="fr">Holy Matrimony</h3>
+          <div class="time fr">4:30 in the afternoon</div>
+          <div class="where">The Chapel of the Hope of the World<br>Ladies' College, Colombo 7</div>
+          <a class="island ghost magnetic" href="https://maps.google.com/?q=Ladies+College+Chapel+Colombo" target="_blank" rel="noopener">View map <span class="ic">&rsaquo;</span></a>
+        </div>
+      </div>
+      <div class="shell reveal">
+        <div class="core">
+          <div class="t">The Reception</div>
+          <h3 class="fr">Cocktails &amp; Dinner</h3>
+          <div class="time fr">6:30 in the evening</div>
+          <div class="where">Sangam Ballroom<br>ITC Ratnadipa, Colombo</div>
+          <a class="island ghost magnetic" href="https://maps.google.com/?q=ITC+Ratnadipa+Colombo" target="_blank" rel="noopener">View map <span class="ic">&rsaquo;</span></a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="wrap fade">
-  <div class="center"><div class="kicker">Good to Know</div><div class="rule sm" data-draw></div></div>
-  <div class="details">
-    <div class="det"><div class="di serif">&#10022;</div><h4>Dress Code</h4><p>Formal / cocktail. Think garden elegance in soft, warm tones.</p></div>
-    <div class="det"><div class="di serif">&#9834;</div><h4>Stay With Us</h4><p>A special guest rate is held at ITC Ratnadipa. Details on request.</p></div>
-    <div class="det"><div class="di serif">&#10084;</div><h4>Gifts</h4><p>Your presence is the gift. If you wish, a note toward our new home.</p></div>
+<section>
+  <div class="wrap narrow">
+    <div class="kick-c reveal"><span class="eyebrow">Good to Know</span><div class="hr sm" data-draw></div></div>
+    <div class="details">
+      <div class="det reveal"><div class="di fr">&#10022;</div><h4>Dress Code</h4><p>Formal / cocktail. Garden elegance in soft, warm tones.</p></div>
+      <div class="det reveal"><div class="di fr">&#9834;</div><h4>Stay With Us</h4><p>A special guest rate is held at ITC Ratnadipa. Details on request.</p></div>
+      <div class="det reveal"><div class="di fr">&#10084;</div><h4>Gifts</h4><p>Your presence is the gift. If you wish, a note toward our new home.</p></div>
+    </div>
   </div>
 </section>
 
 <section class="rsvp">
-  <div class="wrap fade center">
-    <div class="kicker">Will you join us</div>
-    <h2 class="serif" style="font-size:clamp(38px,9vw,64px);font-weight:500;margin:10px 0 0">R.S.V.P.</h2>
-    <div class="sub" style="max-width:420px;margin:10px auto 0">Kindly reply by the first of November, 2026.</div>
-    <div class="panel">
-      <div class="step on" id="s1">
-        <div class="greet serif">Dearest <b id="gname">Raabiah</b>,</div>
-        <div class="sub" id="galloc">you and your party of <b>6</b> are warmly invited.</div>
-        <div class="yn">
-          <button class="joy" onclick="attend(true)">Joyfully accept</button>
-          <button onclick="attend(false)">Regretfully decline</button>
+  <div class="wrap narrow reveal" style="text-align:center">
+    <span class="eyebrow">Will you join us</span>
+    <h2 class="fr" style="font-size:clamp(44px,10vw,76px);font-weight:380;margin:16px 0 0;letter-spacing:-.02em">R.S.V.P.</h2>
+    <div class="sub" style="max-width:420px;margin:12px auto 0">Kindly reply by the first of November, 2026.</div>
+    <div class="panel-shell">
+      <div class="panel">
+        <div class="step on" id="s1">
+          <div class="greet fr">Dearest <b id="gname">Raabiah</b>,</div>
+          <div class="sub" id="galloc">you and your party of <b>6</b> are warmly invited.</div>
+          <div class="yn">
+            <button class="joy" onclick="attend(true)">Joyfully accept</button>
+            <button onclick="attend(false)">Regretfully decline</button>
+          </div>
         </div>
-      </div>
-      <div class="step" id="s2">
-        <div class="greet serif" style="font-size:24px">Wonderful. How many will celebrate with us?</div>
-        <div class="stepper">
-          <button onclick="bump(-1)">&minus;</button>
-          <div><div class="num serif" id="cnt">2</div><div class="cap">of 6 seats</div></div>
-          <button onclick="bump(1)">+</button>
+        <div class="step" id="s2">
+          <div class="greet fr" style="font-size:25px">Wonderful. How many will celebrate with us?</div>
+          <div class="stepper">
+            <button onclick="bump(-1)">&minus;</button>
+            <div><div class="num fr" id="cnt">2</div><div class="cap">of 6 seats</div></div>
+            <button onclick="bump(1)">+</button>
+          </div>
+          <div class="field"><label>Dietary needs or allergies</label><input id="diet" placeholder="e.g. 2 vegetarian, 1 nut allergy"/></div>
+          <div class="field"><label>A song to get you on the dance floor</label><input id="song" placeholder="Artist &amp; title"/></div>
+          <div class="field"><label>Phone or email (so we can reach you)</label><input id="contact" placeholder="Optional"/></div>
+          <div class="field"><label>A message for the couple</label><textarea id="msg" placeholder="Optional"></textarea></div>
+          <button class="cta" onclick="finish('accept')">Send our reply</button>
+          <button class="back" onclick="go('s1')">&lsaquo; Back</button>
         </div>
-        <div class="field"><label>Dietary needs or allergies</label><input id="diet" placeholder="e.g. 2 vegetarian, 1 nut allergy"/></div>
-        <div class="field"><label>A song to get you on the dance floor</label><input id="song" placeholder="Artist &amp; title"/></div>
-        <div class="field"><label>Phone or email (so we can reach you)</label><input id="contact" placeholder="Optional"/></div>
-        <div class="field"><label>A message for the couple</label><textarea id="msg" placeholder="Optional"></textarea></div>
-        <button class="cta" onclick="finish('accept')">Send our reply</button>
-        <button class="back" onclick="go('s1')">&lsaquo; Back</button>
-      </div>
-      <div class="step" id="s3">
-        <div class="greet serif" style="font-size:24px">We will miss you dearly.</div>
-        <div class="sub">If anything changes, our door is always open.</div>
-        <div class="field"><label>Leave the couple a note</label><textarea id="msg2" placeholder="Optional"></textarea></div>
-        <button class="cta" onclick="finish('decline')">Send our reply</button>
-        <button class="back" onclick="go('s1')">&lsaquo; Back</button>
-      </div>
-      <div class="step" id="s4">
-        <div class="done">
-          <div class="seal serif">&#10003;</div>
-          <h3 class="serif" id="doneT">Thank you</h3>
-          <div class="sub" id="doneS">Your reply is on its way to Damisha &amp; Akarsha.</div>
+        <div class="step" id="s3">
+          <div class="greet fr" style="font-size:25px">We will miss you dearly.</div>
+          <div class="sub">If anything changes, our door is always open.</div>
+          <div class="field"><label>Leave the couple a note</label><textarea id="msg2" placeholder="Optional"></textarea></div>
+          <button class="cta" onclick="finish('decline')">Send our reply</button>
+          <button class="back" onclick="go('s1')">&lsaquo; Back</button>
+        </div>
+        <div class="step" id="s4">
+          <div class="done">
+            <div class="seal">&#10003;</div>
+            <h3 class="fr" id="doneT">Thank you</h3>
+            <div class="sub" id="doneS">Your reply is on its way to Damisha &amp; Akarsha.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -225,26 +265,23 @@ section{position:relative;z-index:1;padding:80px 0}
 
 <footer class="foot">
   <svg class="crest" viewBox="0 0 200 200" aria-label="D and A monogram">
-    <circle cx="100" cy="100" r="80" fill="none" stroke="#CFA69C" stroke-width="1.6"/>
-    <text x="80" y="140" text-anchor="middle">D</text>
-    <text x="122" y="140" text-anchor="middle">A</text>
+    <circle cx="100" cy="100" r="80" fill="none" stroke="#DEB9AE" stroke-width="1.6"/>
+    <text x="80" y="140" text-anchor="middle" style="animation:none;opacity:1">D</text>
+    <text x="122" y="140" text-anchor="middle" style="animation:none;opacity:1">A</text>
   </svg>
-  <p>5 · 12 · 2026 &nbsp;·&nbsp; Colombo</p>
+  <p>5 &middot; 12 &middot; 2026 &nbsp;&middot;&nbsp; Colombo</p>
 </footer>
 
 <script>
 const TARGET=new Date("2026-12-05T16:30:00+05:30");
 function cd(){let s=Math.max(0,(TARGET-new Date())/1000);const d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60);
-  document.getElementById('cd').innerHTML=[[d,'Days'],[h,'Hours'],[m,'Minutes']].map(x=>'<div><div class="n serif">'+x[0]+'</div><div class="l">'+x[1]+'</div></div>').join('');}
+  document.getElementById('cd').innerHTML=[[d,'Days'],[h,'Hours'],[m,'Minutes']].map(x=>'<div><div class="n">'+x[0]+'</div><div class="l">'+x[1]+'</div></div>').join('');}
 cd();setInterval(cd,1000*30);
 
-// petals
-(function(){const p=document.getElementById('petals');let html='';for(let i=0;i<14;i++){const l=Math.random()*100,dur=9+Math.random()*10,del=-Math.random()*14,sc=.6+Math.random()*.8;html+='<span class="petal" style="left:'+l+'%;animation-duration:'+dur+'s;animation-delay:'+del+'s;transform:scale('+sc+')"></span>';}p.innerHTML=html;})();
+(function(){const p=document.getElementById('petals');let h='';for(let i=0;i<13;i++){const l=Math.random()*100,dur=10+Math.random()*10,del=-Math.random()*16,sc=.55+Math.random()*.8;h+='<span class="petal" style="left:'+l+'%;animation-duration:'+dur+'s;animation-delay:'+del+'s;transform:scale('+sc+')"></span>';}p.innerHTML=h;})();
 
-// draw hero rule
-setTimeout(()=>document.getElementById('r1').classList.add('draw'),1000);
+setTimeout(()=>document.getElementById('r1').classList.add('draw'),1050);
 
-// demo personalisation
 const DEMO={name:'Raabiah',pax:6};
 document.getElementById('gname').textContent=DEMO.name;
 document.getElementById('galloc').innerHTML='you and your party of <b>'+DEMO.pax+'</b> are warmly invited.';
@@ -258,9 +295,15 @@ function finish(kind){
   go('s4');
 }
 
-// reveal + draw on scroll
-const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');e.target.querySelectorAll('[data-draw]').forEach(r=>r.classList.add('draw'));}}),{threshold:.15});
-document.querySelectorAll('.fade').forEach(f=>io.observe(f));
+// staggered blur-up reveals
+const io=new IntersectionObserver((es)=>es.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>{e.target.classList.add('in');e.target.querySelectorAll('[data-draw]').forEach(r=>r.classList.add('draw'));},(i%3)*90);io.unobserve(e.target);}}),{threshold:.16,rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.reveal').forEach(f=>io.observe(f));
+
+// magnetic buttons
+document.querySelectorAll('.magnetic').forEach(btn=>{
+  btn.addEventListener('pointermove',e=>{const r=btn.getBoundingClientRect();const x=(e.clientX-r.left-r.width/2)/r.width;const y=(e.clientY-r.top-r.height/2)/r.height;btn.style.transform='translate('+(x*6)+'px,'+(y*6)+'px)';});
+  btn.addEventListener('pointerleave',()=>{btn.style.transform='';});
+});
 </script>
 </body>
 </html>
