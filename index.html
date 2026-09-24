@@ -254,7 +254,8 @@ section{position:relative;z-index:2;padding:120px 0}
           <div class="done">
             <div class="seal">&#10003;</div>
             <h3 class="fr" id="doneT">Thank you</h3>
-            <div class="sub" id="doneS">Your reply is on its way to Damisha &amp; Akarsha.</div>
+            <div class="sub" id="doneS">Your reply is ready to send.</div>
+            <a id="waLink" class="island magnetic" target="_blank" rel="noopener" style="margin-top:24px">Send on WhatsApp <span class="ic">&rsaquo;</span></a>
           </div>
         </div>
       </div>
@@ -285,9 +286,23 @@ let count=Math.min(2,DEMO.pax);
 function go(id){document.querySelectorAll('.step').forEach(s=>s.classList.remove('on'));document.getElementById(id).classList.add('on');document.querySelector('.panel').scrollIntoView({behavior:'smooth',block:'center'});}
 function attend(yes){ if(yes){document.getElementById('cnt').textContent=count;go('s2');} else go('s3'); }
 function bump(d){count=Math.max(1,Math.min(DEMO.pax,count+d));document.getElementById('cnt').textContent=count;}
+const WA='94778980945';
+function val(id){const e=document.getElementById(id);return e?e.value.trim():'';}
 function finish(kind){
-  if(kind==='accept'){document.getElementById('doneT').textContent='Joyfully received';document.getElementById('doneS').innerHTML='See you on the dance floor, '+DEMO.name+'. Your reply for <b>'+count+'</b> is on its way to Damisha &amp; Akarsha.';}
-  else{document.getElementById('doneT').textContent='Thank you for letting us know';document.getElementById('doneS').textContent='You will be missed. Sending you our love.';}
+  let t;
+  if(kind==='accept'){
+    t='RSVP \u00b7 Damisha & Akarsha\n\nName: '+DEMO.name+'\nJoyfully attending: '+count+' of '+DEMO.pax;
+    const d=val('diet'),so=val('song'),c=val('contact'),m=val('msg');
+    if(d)t+='\nDietary: '+d; if(so)t+='\nSong: '+so; if(c)t+='\nContact: '+c; if(m)t+='\nMessage: '+m;
+    document.getElementById('doneT').textContent='Joyfully received';
+    document.getElementById('doneS').innerHTML='One tap to send your reply to the couple, '+DEMO.name+'.';
+  } else {
+    t='RSVP \u00b7 Damisha & Akarsha\n\nName: '+DEMO.name+'\nRegretfully unable to attend';
+    const m=val('msg2'); if(m)t+='\nMessage: '+m;
+    document.getElementById('doneT').textContent='Thank you for letting us know';
+    document.getElementById('doneS').innerHTML='One tap to send your reply to the couple.';
+  }
+  document.getElementById('waLink').href='https://wa.me/'+WA+'?text='+encodeURIComponent(t);
   go('s4');
 }
 
